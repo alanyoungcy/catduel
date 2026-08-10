@@ -1,0 +1,14 @@
+.godot/
+.assetgen-venv/
+dist/
+.DS_Store
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.pfx
+*.key
+id_rsa
+id_ed25519
+*.import
