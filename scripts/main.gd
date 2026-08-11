@@ -21,6 +21,11 @@ func _ready() -> void:
 	show_title()
 
 func wipe() -> void:
+	# Stop all running tweens to prevent infinite loop errors
+	for tween in get_tree().get_processed_tweens():
+		if tween.is_valid():
+			tween.kill()
+
 	for child in get_children():
 		if child != audio_player:
 			child.queue_free()
@@ -143,8 +148,11 @@ func make_cat(name: String, path: String, fallback_color: Color, motion := "idle
 	return box
 
 func animate_cat(image: TextureRect, motion: String) -> void:
+	if not is_instance_valid(image) or image.is_queued_for_deletion():
+		return
 	image.pivot_offset = image.custom_minimum_size * 0.5
 	var tween := create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	if motion == "gesture":
 		image.scale = Vector2(0.78, 0.78)
 		tween.tween_property(image, "scale", Vector2(1.16, 1.16), 0.16).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
