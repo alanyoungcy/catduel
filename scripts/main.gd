@@ -1,6 +1,7 @@
 extends Control
 
 const AI = preload("res://scripts/ai_opponent.gd")
+const UI_FONT = preload("res://assets/fonts/NotoSansTC-Regular.otf")
 const BG_COLOR := Color("#fff5ed")
 const INK := Color("#503c49")
 const PINK := Color("#ff9fb5")
@@ -50,6 +51,7 @@ func label(text: String, font_size := 26, color := INK) -> Label:
 	var node := Label.new()
 	node.text = text
 	node.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	node.add_theme_font_override("font", UI_FONT)
 	node.add_theme_font_size_override("font_size", font_size)
 	node.add_theme_color_override("font_color", color)
 	node.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -59,6 +61,7 @@ func button(text: String, action: Callable, color := PINK) -> Button:
 	var node := Button.new()
 	node.text = text
 	node.custom_minimum_size = Vector2(310, 62)
+	node.add_theme_font_override("font", UI_FONT)
 	node.add_theme_font_size_override("font_size", 24)
 	node.add_theme_color_override("font_color", INK)
 	var normal := StyleBoxFlat.new()
