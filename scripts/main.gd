@@ -112,7 +112,7 @@ func centered(node: Control) -> void:
 func show_title() -> void:
 	wipe()
 	content.add_spacer(true)
-	centered(label("🐾  貓咪二段式剪刀石頭布  🐾", 42, Color("#e76f91")))
+	centered(label("貓咪二段式剪刀石頭布", 42, Color("#e76f91")))
 	centered(label("秘密選兩個，再悄悄刪一個！", 25))
 	var cats := HBoxContainer.new()
 	cats.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -136,7 +136,7 @@ func make_cat(name: String, path: String, fallback_color: Color, motion := "idle
 		box.add_child(image)
 		call_deferred("animate_cat", image, motion)
 	else:
-		var face := label("🐱", 130, fallback_color)
+		var face := label("貓咪", 56, fallback_color)
 		face.custom_minimum_size = Vector2(210, 220)
 		box.add_child(face)
 	box.add_child(label(name, 25))
@@ -216,8 +216,8 @@ func show_player_mode() -> void:
 	content.add_spacer(true)
 	centered(label("選擇對戰方式", 36, Color("#e76f91")))
 	centered(label("雙人模式會在每次秘密選擇時遮蔽畫面。", 20))
-	centered(button("👫  雙人本機對戰", func(): GameState.mode = GameState.Mode.PVP; show_match_rule(), BLUE))
-	centered(button("🤖  挑戰電腦 阿灰", func(): GameState.mode = GameState.Mode.PVC; show_match_rule(), PINK))
+	centered(button("雙人本機對戰", func(): GameState.mode = GameState.Mode.PVP; show_match_rule(), BLUE))
+	centered(button("挑戰電腦 阿灰", func(): GameState.mode = GameState.Mode.PVC; show_match_rule(), PINK))
 	centered(button("返回主選單", show_title, Color("#e8ded8")))
 	content.add_spacer(true)
 
@@ -311,7 +311,7 @@ func keep_gesture(index: int) -> void:
 func pass_device(next_actor: int, next: Callable) -> void:
 	wipe()
 	content.add_spacer(true)
-	centered(label("🔒 祕密交接時間", 39, Color("#e76f91")))
+	centered(label("祕密交接時間", 39, Color("#e76f91")))
 	centered(label("請將裝置交給 %s" % GameState.player_names[next_actor], 31))
 	centered(label("上一位玩家的手勢已經完全遮蔽。", 20))
 	centered(button("我是 %s，開始選擇" % GameState.player_names[next_actor], next, BLUE))
@@ -321,7 +321,7 @@ func show_reveal() -> void:
 	GameState.stage = GameState.Stage.REVEAL
 	wipe()
 	content.add_spacer(true)
-	centered(label("✨ 同時公開！ ✨", 39, Color("#e76f91")))
+	centered(label("同時公開！", 39, Color("#e76f91")))
 	var showdown := HBoxContainer.new()
 	showdown.alignment = BoxContainer.ALIGNMENT_CENTER
 	showdown.add_theme_constant_override("separation", 72)
@@ -373,7 +373,7 @@ func show_match_result() -> void:
 	wipe()
 	var winner := 0 if GameState.score[0] > GameState.score[1] else 1
 	content.add_spacer(true)
-	centered(label("🏆 %s 獲勝！ 🏆" % GameState.player_names[winner], 43, Color("#e76f91")))
+	centered(label("%s 獲勝！" % GameState.player_names[winner], 43, Color("#e76f91")))
 	var cats := HBoxContainer.new()
 	cats.alignment = BoxContainer.ALIGNMENT_CENTER
 	cats.add_theme_constant_override("separation", 90)
