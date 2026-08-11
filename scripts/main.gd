@@ -204,6 +204,7 @@ func start_countdown(title: String, next: Callable) -> void:
 	centered(count_label)
 	centered(label("準備好你的貓爪！", 23))
 	content.add_spacer(true)
+	await get_tree().process_frame
 	for number in [3, 2, 1]:
 		count_label.text = str(number)
 		play_tone(500.0 + (3 - number) * 120.0, 0.13, true)
@@ -234,7 +235,7 @@ func show_match_rule() -> void:
 func add_rule(title: String, description: String, rule: int) -> void:
 	var group := VBoxContainer.new()
 	group.alignment = BoxContainer.ALIGNMENT_CENTER
-	group.add_child(button(title, func(): GameState.match_rule = rule; GameState.reset_match(); begin_round(), PINK))
+	group.add_child(button(title, func(): GameState.match_rule = rule; GameState.reset_match(); call_deferred("begin_round"), PINK))
 	group.add_child(label(description, 18))
 	content.add_child(group)
 
@@ -247,7 +248,7 @@ func begin_round() -> void:
 func stage_one(actor: int) -> void:
 	current_actor = actor
 	picked = []
-	start_countdown("第一階段即將開始", render_stage_one)
+	call_deferred("start_countdown", "第一階段即將開始", render_stage_one)
 
 func render_stage_one() -> void:
 	wipe()
@@ -280,7 +281,7 @@ func choose_gesture(gesture: int) -> void:
 
 func stage_two(actor: int) -> void:
 	current_actor = actor
-	start_countdown("第二階段即將開始", render_stage_two)
+	call_deferred("start_countdown", "第二階段即將開始", render_stage_two)
 
 func render_stage_two() -> void:
 	wipe()
